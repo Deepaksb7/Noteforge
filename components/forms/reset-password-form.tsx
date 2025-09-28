@@ -33,7 +33,7 @@ const formSchema = z.object({
   password: z.string().min(8),
 })
 
-export function LoginForm({
+export function ResetPasswordForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
@@ -103,7 +103,7 @@ export function LoginForm({
                         <div className="flex items-center">
                           <FormLabel>Password</FormLabel>
                           <Link
-                            href="/forgotpassword"
+                            href="#"
                             className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
                           >
                             Forgot your password?

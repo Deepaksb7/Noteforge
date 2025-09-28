@@ -26,37 +26,39 @@ import { useState } from "react"
 import { toast } from "sonner"
 import { Loader2 } from "lucide-react"
 import Link from "next/link"
-import { useRouter } from "next/navigation"
+import { authClient } from "@/lib/auth-client"
+import { redirect } from "next/navigation"
 
 const formSchema = z.object({
   email: z.email(),
-  password: z.string().min(8),
 })
 
-export function LoginForm({
+export function ForgotPasswordForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
-  const router = useRouter()
+
   const [isLoading, setIsLoading] = useState(false)
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       email: "",
-      password: ""
     },
   })
   
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
       setIsLoading(true)
-      const response = await signInUser(values.email, values.password)
-      if(response.success){
-        toast.success(response.message)
-        router.push('/dashboard')
+      const {error} = await authClient.forgetPassword({
+        email:values.email,
+        redirectTo:'/resetpassword'
+      })
+      if(!error){
+        toast.success("Please check your email for reset link.")
+  
       }
       else{
-        toast.error(response.message)
+        toast.error(error.message)
       }
     } catch (error) {
       console.error(error)
@@ -70,9 +72,9 @@ export function LoginForm({
 
       <Card>
         <CardHeader>
-          <CardTitle>Login to your account</CardTitle>
+          <CardTitle>Forgot your password</CardTitle>
           <CardDescription>
-            Enter your email below to login to your account
+            Enter your email below to reset your password
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -94,35 +96,9 @@ export function LoginForm({
                     )}
                   />
                 </div>
-                <div className="grid gap-3">
-                  <FormField
-                    control={form.control}
-                    name="password"
-                    render={({ field }) => (
-                      <FormItem>
-                        <div className="flex items-center">
-                          <FormLabel>Password</FormLabel>
-                          <Link
-                            href="/forgotpassword"
-                            className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
-                          >
-                            Forgot your password?
-                          </Link>
-                        </div>
-                        <FormControl>
-                          <Input type="password" placeholder="*********" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
                 <div className="flex flex-col gap-3">
                   <Button type="submit" className="w-full" disabled={isLoading}>
-                    {isLoading ? <Loader2 className="size-4 animate-spin" /> : "Login"}
-                  </Button>
-                  <Button variant="outline" className="w-full">
-                    Login with Google
+                    {isLoading ? <Loader2 className="size-4 animate-spin" /> : "Reset Password"}
                   </Button>
                 </div>
               </div>
