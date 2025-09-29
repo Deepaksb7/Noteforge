@@ -26,11 +26,12 @@ import { useState } from "react"
 import { toast } from "sonner"
 import { Loader2 } from "lucide-react"
 import Link from "next/link"
-import { useRouter } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
+import { authClient } from "@/lib/auth-client"
 
 const formSchema = z.object({
-  email: z.email(),
   password: z.string().min(8),
+  confirmPassword: z.string().min(8),
 })
 
 export function ResetPasswordForm({
@@ -38,25 +39,38 @@ export function ResetPasswordForm({
   ...props
 }: React.ComponentProps<"div">) {
   const router = useRouter()
+
+  const searchParams = useSearchParams()
+  const token = searchParams.get("token")
+
   const [isLoading, setIsLoading] = useState(false)
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      email: "",
-      password: ""
+      password: "",
+      confirmPassword: ""
     },
   })
   
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
       setIsLoading(true)
-      const response = await signInUser(values.email, values.password)
-      if(response.success){
-        toast.success(response.message)
-        router.push('/dashboard')
+
+      if (values.password !== values.confirmPassword){
+        toast.error("Passwords do not match")
+        return
+      }
+
+      const {error} = await authClient.resetPassword({
+        newPassword:values.password,
+        token: token ?? "",
+      })
+      if(!error){
+        toast.success("Password reset successfully.")
+        router.push('/login')
       }
       else{
-        toast.error(response.message)
+        toast.error(error.message)
       }
     } catch (error) {
       console.error(error)
@@ -70,9 +84,9 @@ export function ResetPasswordForm({
 
       <Card>
         <CardHeader>
-          <CardTitle>Login to your account</CardTitle>
+          <CardTitle>Reset to your account</CardTitle>
           <CardDescription>
-            Enter your email below to login to your account
+            Enter your new password below to reset your password
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -82,12 +96,14 @@ export function ResetPasswordForm({
                 <div className="grid gap-3">
                   <FormField
                     control={form.control}
-                    name="email"
+                    name="password"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Email</FormLabel>
+                        <div className="flex items-center">
+                          <FormLabel>Password</FormLabel>
+                        </div>
                         <FormControl>
-                          <Input placeholder="m@example.com" {...field} />
+                          <Input type="password" placeholder="*********" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -97,17 +113,11 @@ export function ResetPasswordForm({
                 <div className="grid gap-3">
                   <FormField
                     control={form.control}
-                    name="password"
+                    name="confirmPassword"
                     render={({ field }) => (
                       <FormItem>
                         <div className="flex items-center">
-                          <FormLabel>Password</FormLabel>
-                          <Link
-                            href="#"
-                            className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
-                          >
-                            Forgot your password?
-                          </Link>
+                          <FormLabel>Confirm Password</FormLabel>
                         </div>
                         <FormControl>
                           <Input type="password" placeholder="*********" {...field} />
@@ -119,10 +129,7 @@ export function ResetPasswordForm({
                 </div>
                 <div className="flex flex-col gap-3">
                   <Button type="submit" className="w-full" disabled={isLoading}>
-                    {isLoading ? <Loader2 className="size-4 animate-spin" /> : "Login"}
-                  </Button>
-                  <Button variant="outline" className="w-full">
-                    Login with Google
+                    {isLoading ? <Loader2 className="size-4 animate-spin" /> : "Reset Password"}
                   </Button>
                 </div>
               </div>
