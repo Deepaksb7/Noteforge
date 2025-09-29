@@ -1,12 +1,15 @@
 import { Logout } from '@/components/logout'
+import PageWrapper from '@/components/page-wrapper'
 import React from 'react'
 
 const Dashboard = () => {
   return (
-    <div>
+    <PageWrapper breadcrumbs={[{label:"Dashboard",href:"/dashboard"}]}>
+      <h1>
       dashboard
+      </h1>
       <Logout />
-    </div>
+    </PageWrapper>
   )
 }
 
