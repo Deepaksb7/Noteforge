@@ -20,9 +20,12 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from "@/components/ui/sidebar"
+import { getNotebooks } from "@/server/notebooks"
 
-// This is sample data.
-const data = {
+export async function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const notebooks = await getNotebooks()
+
+  const data = {
   versions: ["1.0.1", "1.1.0-alpha", "2.0.0-beta1"],
   navMain: [
     {
@@ -162,8 +165,6 @@ const data = {
     },
   ],
 }
-
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar {...props}>
       <SidebarHeader>
