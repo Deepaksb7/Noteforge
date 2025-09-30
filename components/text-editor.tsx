@@ -54,8 +54,7 @@ const RichTextEditor = ({ content, noteId }: RichTextEditorProps) => {
     onUpdate: ({ editor }) => {
       if (noteId) {
         const content = editor.getJSON();
-        // updateNote(noteId, { content });
-        console.log(content);
+        updateNote(noteId, { content });
       }
     },
     content: content ?? {
