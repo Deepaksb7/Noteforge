@@ -17,7 +17,7 @@ export const createNote = async (values: InsertNote) =>{
     }
 }
 
-export const getNotesById = async (id:string) =>{
+export const getNoteById = async (id:string) =>{
     try {
         const note = await db.select().from(notes).where(eq(notes.id , id));
         return {success:true , note}
