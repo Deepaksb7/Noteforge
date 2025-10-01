@@ -162,7 +162,7 @@ const RichTextEditor = ({ content, noteId }: RichTextEditorProps) => {
   };
 
   return (
-    <div className="w-full max-w-7xl bg-card text-card-foreground rounded-lg overflow-hidden border">
+    <div className="w-full max-w-9xl bg-card text-card-foreground rounded-lg overflow-hidden border">
       {/* Toolbar */}
       <div className="flex items-center gap-1 p-2 bg-muted/50 border-b">
         {/* Undo/Redo */}

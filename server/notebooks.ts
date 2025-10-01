@@ -12,7 +12,7 @@ export const createNotebook = async (values: InsertNotebook) =>{
            values
         )
         return {success:true , message:"Notebook created successfully"}
-    } catch (error) {
+    } catch {
         return {success:false , message:"Failed to create notebook"}
     }
 }
@@ -38,7 +38,7 @@ export const getNotebooks = async () =>{
         
 
         return {success:true , notebooks:notebooksByUser}
-    } catch (error) {
+    } catch  {
         return {success:false , message:"Failed to get notebooks"}
     }
 }
@@ -52,7 +52,7 @@ export const getNotebooksById = async (id:string) =>{
             }
         })
         return {success:true , notebook}
-    } catch (error) {
+    } catch  {
         return {success:false , message:"Failed to get notebooks"}
     }
 }
@@ -61,7 +61,7 @@ export const updateNotebook = async (id:string , values:InsertNotebook)=>{
     try {
         await db.update(notebooks).set(values).where(eq(notebooks.id , id))
         return {success:true , message:"Notebook updated successfully"}
-    } catch (error) {
+    } catch {
         return {success:false , message:"Failed to update notebook"}
     }
 }
@@ -70,7 +70,7 @@ export const deleteNotebook = async (id:string)=>{
     try {
         await db.delete(notebooks).where(eq(notebooks.id , id))
         return {success:true , message:"Notebook deleted successfully"}
-    } catch (error) {
+    } catch  {
         return {success:false , message:"Failed to delete notebook"}
     }
 }

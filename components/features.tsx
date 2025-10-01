@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
-import { FileCode, NotebookPen, Settings2, ShieldUser, Sparkles, Zap } from 'lucide-react'
+import { FileCode, NotebookPen,  ShieldUser } from 'lucide-react'
 import { ReactNode } from 'react'
 
 export default function Features() {
