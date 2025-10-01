@@ -1,6 +1,6 @@
 "use client"
 
-import { set, success, z } from "zod"
+import { z } from "zod"
 import { Button } from "./ui/button"
 import {
     Dialog,
@@ -15,7 +15,7 @@ import { useForm } from "react-hook-form"
 import {
     Form,
     FormControl,
-    FormDescription,
+
     FormField,
     FormItem,
     FormLabel,
@@ -74,7 +74,7 @@ export const CreateNotebookButton = () => {
 }
     return <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogTrigger asChild>
-            <Button>Create Notebook</Button>
+            <Button className="w-max">Create Notebook</Button>
         </DialogTrigger>
         <DialogContent>
             <DialogHeader>
