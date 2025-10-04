@@ -1,8 +1,5 @@
 # Noteforge
 
-[![Vercel Deployment](https://vercelbadge.vercel.app/api/noteforge-ten?style=flat-square)](https://noteforge-ten.vercel.app)  
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg?style=flat-square)](./LICENSE)
-
 <br>
 
 **Noteforge** is a **multi-tenant, collaborative note-taking SaaS** built with **Next.js 14** and **TypeScript**. It offers a rich, performant, and secure environment for individuals and teams to create, organize, and share notes effectively.
@@ -60,7 +57,7 @@ This README will guide you through understanding the project, its setup, and how
 | Styling        | CSS Modules, Tailwind CSS       |
 | State Management| React Context, React Query     |
 | Authentication | NextAuth.js, JWT                |
-| Database       | PostgreSQL via Prisma ORM       |
+| Database       | PostgreSQL via drizzle ORM       |
 | Deployment     | Vercel                          |
 | Fonts & Assets | next/font, Next.js Image        |
 
