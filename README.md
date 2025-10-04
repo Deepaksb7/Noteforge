@@ -1,89 +1,81 @@
-# Noteforge
+# 📝 Noteforge
 
-<br>
-
-**Noteforge** is a **multi-tenant, collaborative note-taking SaaS** built with **Next.js 14** and **TypeScript**. It offers a rich, performant, and secure environment for individuals and teams to create, organize, and share notes effectively.
-
-## Project Overview
-
-Noteforge provides:
-
-- **Rich-Text Note Creation**: Block-based editor supporting headings, lists, code blocks, images, and checklists.
-- **Organizational Tools**: Tags, nested folders, and search to manage and retrieve notes.
-- **Collaboration**: Shared workspaces with role-based access (Admin, Editor, Viewer).
-- **Data Isolation**: Multi-tenancy ensures each workspace’s data is siloed.
-- **Performance Optimizations**: Server components, edge caching, and optimized assets for fast loading.
-- **Security**: OAuth with NextAuth.js, JWT authentication, session management, and refresh tokens.
-
-This README will guide you through understanding the project, its setup, and how to extend it.
+**Noteforge** is a **multi-tenant, collaborative note-taking SaaS** built with **Next.js 14** and **TypeScript**. It provides a rich, performant, and secure environment for individuals and teams to create, organize, and share notes efficiently.
 
 ---
 
-## Features
+## 🚀 Features
 
-1. **Rich-Text Editor**
-   - WYSIWYG and Markdown modes
-   - Headings, paragraphs, lists, code snippets, embedded images
-2. **Note Organization**
-   - Tags and nested folders
-   - Full-text search across notes
-3. **Collaboration & Roles**
-   - Create and join workspaces
-   - Role-based permissions (Admin, Editor, Viewer)
-4. **Authentication**
-   - OAuth providers (Google) via NextAuth.js
-   - Email/password sign-up and login
-   - JWT tokens with automatic rotation
-5. **Performance**
-   - Next.js App Router and Server Components
-   - Edge caching for public content
-   - Font optimization with `next/font`
-6. **Accessibility**
-   - WCAG 2.1 AA compliance
-   - ARIA labels and keyboard navigation
-7. **Extensibility**
-   - REST API endpoints
-   - Webhooks for integration
-   - Plugin-ready architecture
+### 🧠 1. Rich-Text Editor
+- **WYSIWYG and Markdown Modes:** Seamlessly switch between visual and markdown editing for a flexible writing experience.  
+- **Comprehensive Formatting:** Supports headings, paragraphs, lists (bulleted/ordered), bold, italic, strikethrough, underline, code snippets, and blockquotes.  
+- **Developer-Focused:** Includes syntax-highlighted code blocks for saving code snippets.
 
 ---
 
-## Tech Stack
-
-| Category       | Technology                      |
-| -------------- | ------------------------------- |
-| Framework      | Next.js 14 (App Router)         |
-| Language       | TypeScript                      |
-| Styling        | CSS Modules, Tailwind CSS       |
-| State Management| React Context, React Query     |
-| Authentication | NextAuth.js, JWT                |
-| Database       | PostgreSQL via drizzle ORM       |
-| Deployment     | Vercel                          |
-| Fonts & Assets | next/font, Next.js Image        |
+### 📚 2. Note & Notebook Management
+- **Create and Manage Notebooks:** Organize your work into notebooks. Easily create, update, or delete them.  
+- **Create and Manage Notes:** Add, edit, or remove notes within any notebook.  
+- **Rich Content Support:** Mix text, code, and media in a single note.
 
 ---
 
-## Demo
-
-Live demo: https://noteforge-ten.vercel.app
+### 🔐 3. Authentication & User Management
+- **Email & Password Authentication**  
+- **Google Login (OAuth)**  
+- **Forgot/Reset Password** — Secure email-based password reset.  
+- **Email Verification** — New users confirm their account via email before logging in.
 
 ---
 
-## Installation
+### 💻 4. User Interface
+- **Modern UI:** Built with **Shadcn UI** and **Tailwind CSS** for a clean, minimal aesthetic.  
+- **Light & Dark Mode** support.  
+- **Fully Responsive** — Works seamlessly across all screen sizes.  
+- **Sidebar Navigation:** Collapsible sidebar for easy access to notebooks and notes.
 
-### Prerequisites
+---
 
-- Node.js v18+
-- npm, yarn, or pnpm
-- PostgreSQL database
+### ⚙️ 5. Technology & Performance
+- **Next.js App Router:** Utilizes the latest features for optimal performance and developer experience.  
+- **React Server Components:** Faster page loads and improved SEO.  
+- **Drizzle ORM:** Type-safe database queries with TypeScript-first ORM.  
+- **PostgreSQL:** Reliable and powerful relational database.  
 
-### Steps
+---
+
+## 🧩 Tech Stack
+
+| Category | Technology |
+|-----------|-------------|
+| **Framework** | Next.js 14 (App Router) |
+| **Language** | TypeScript |
+| **Styling** | Tailwind CSS, Shadcn UI |
+| **State Management** | React Context, React Hook Form |
+| **Authentication** | better-auth, Google OAuth |
+| **Database** | PostgreSQL |
+| **ORM** | Drizzle ORM |
+| **Deployment** | Vercel |
+
+---
+
+## 📦 Installation
+
+### ✅ Prerequisites
+- Node.js v18+  
+- npm, yarn, or pnpm  
+- PostgreSQL database  
+
+---
+
+### 🧰 Setup
 
 1. **Clone the repo**:
    ```bash
    git clone https://github.com/Deepaksb7/Noteforge.git
    cd Noteforge
    ```
+   
 2. **Install dependencies**:
    ```bash
    npm install
