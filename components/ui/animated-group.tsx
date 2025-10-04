@@ -1,8 +1,10 @@
 'use client';
-import { ReactNode } from 'react';
-import { motion, Variants } from 'motion/react';
-import React from 'react';
 
+import React, { ReactNode } from 'react';
+import { motion, Variants } from 'motion/react';
+import type { JSX } from "react";
+
+// ✅ Use React’s built-in JSX namespace without explicit import
 export type PresetType =
   | 'fade'
   | 'slide'
@@ -23,10 +25,11 @@ export type AnimatedGroupProps = {
     item?: Variants;
   };
   preset?: PresetType;
-  as?: React.ElementType;
-  asChild?: React.ElementType;
+  as?: keyof JSX.IntrinsicElements | React.ElementType;
+  asChild?: keyof JSX.IntrinsicElements | React.ElementType;
 };
 
+// ✅ Default motion variants
 const defaultContainerVariants: Variants = {
   visible: {
     transition: {
@@ -40,6 +43,7 @@ const defaultItemVariants: Variants = {
   visible: { opacity: 1 },
 };
 
+// ✅ Preset animation definitions
 const presetVariants: Record<PresetType, Variants> = {
   fade: {},
   slide: {
@@ -95,12 +99,13 @@ const presetVariants: Record<PresetType, Variants> = {
   },
 };
 
+// ✅ Helper to merge default + custom variants
 const addDefaultVariants = (variants: Variants) => ({
   hidden: { ...defaultItemVariants.hidden, ...variants.hidden },
   visible: { ...defaultItemVariants.visible, ...variants.visible },
 });
 
-function AnimatedGroup({
+export function AnimatedGroup({
   children,
   className,
   variants,
@@ -112,22 +117,18 @@ function AnimatedGroup({
     item: addDefaultVariants(preset ? presetVariants[preset] : {}),
     container: addDefaultVariants(defaultContainerVariants),
   };
+
   const containerVariants = variants?.container || selectedVariants.container;
   const itemVariants = variants?.item || selectedVariants.item;
 
-  const MotionComponent = React.useMemo(
-    () => motion.create(as as keyof JSX.IntrinsicElements),
-    [as]
-  );
-  const MotionChild = React.useMemo(
-    () => motion.create(asChild as keyof JSX.IntrinsicElements),
-    [asChild]
-  );
+  // ✅ Fix: Use motion() instead of motion.create()
+  const MotionComponent = React.useMemo(() => motion(as), [as]);
+  const MotionChild = React.useMemo(() => motion(asChild), [asChild]);
 
   return (
     <MotionComponent
-      initial='hidden'
-      animate='visible'
+      initial="hidden"
+      animate="visible"
       variants={containerVariants}
       className={className}
     >
@@ -139,5 +140,3 @@ function AnimatedGroup({
     </MotionComponent>
   );
 }
-
-export { AnimatedGroup };
